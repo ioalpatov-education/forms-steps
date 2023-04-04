@@ -1,7 +1,8 @@
+import Steps from "./components/Steps";
 import "./App.css";
 
 function App() {
-  return <div className="App"></div>;
+  return <Steps />;
 }
 
 export default App;
