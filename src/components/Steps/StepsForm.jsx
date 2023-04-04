@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 
 const stepsFormSchema = Yup.object({
   date: Yup.string().required("Обязательное поле"),
@@ -15,7 +16,9 @@ const StepsForm = ({ onAddStep }) => {
 
   const addStep = (values, actions) => {
     const { date, kilometers } = values;
+
     actions.resetForm();
+
     const newStep = {
       date: new Date(date),
       kilometers,
@@ -30,7 +33,6 @@ const StepsForm = ({ onAddStep }) => {
       initialValues={{ date: "", kilometers: "" }}
       validationSchema={stepsFormSchema}
       onSubmit={addStep}
-      a
     >
       <Form className="steps-form">
         <div className="form-group">
@@ -53,6 +55,10 @@ const StepsForm = ({ onAddStep }) => {
       </Form>
     </Formik>
   );
+};
+
+StepsForm.propTypes = {
+  onAddStep: PropTypes.func.isRequired,
 };
 
 export default StepsForm;

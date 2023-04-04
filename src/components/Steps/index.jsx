@@ -29,10 +29,21 @@ const Steps = () => {
     setSteps([...newSteps]);
   };
 
+  const deleteStep = (stepId) => {
+    const newSteps = steps.filter((step) => step.id !== stepId);
+    setSteps([...newSteps]);
+  };
+
+  const editStep = (stepId) => {};
+
   return (
     <div className="steps-wrapper">
       <StepsForm onAddStep={addStep} />
-      <StepsList steps={steps} />
+      <StepsList
+        steps={steps}
+        onDeleteStep={deleteStep}
+        onEditStep={editStep}
+      />
     </div>
   );
 };

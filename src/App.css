@@ -47,17 +47,29 @@
 
 .steps-list__header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 1rem;
+  padding: 0 40px;
+}
+
+.steps-list__header .header__km {
+  margin-right: 2rem;
 }
 
 .steps-list {
+  display: flex;
+  flex-direction: column;
   border: #000000 solid 2px;
-  border-spacing: 40px;
   border-radius: 30px;
   width: 500px;
+  padding: 20px 40px;
+  gap: 20px;
 }
 
-.steps-list__body {
-  /* padding: 2rem; */
+.steps-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
+

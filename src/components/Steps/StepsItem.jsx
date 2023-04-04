@@ -1,27 +1,47 @@
 import "material-icons/iconfont/material-icons.css";
 import IconButton from "@mui/material/IconButton";
 import { convertDateToString } from "./utils";
+import PropTypes from "prop-types";
 
-const StepsItem = ({ step }) => {
+const StepsItem = ({ step, onDeleteStep, onEditStep }) => {
   const { id, date, kilometers } = step;
-  const editStep = () => {};
 
-  const deleteStep = () => {};
+  const deleteStep = () => {
+    onDeleteStep(id);
+  };
+
+  const editStep = () => {
+    onEditStep(id);
+  };
 
   return (
-    <tr>
-      <td align="left">{convertDateToString(date)}</td>
-      <td align="center">{kilometers}</td>
-      <td align="right">
+    <div className="steps-item">
+      <div>
+        <span>{convertDateToString(date)}</span>
+      </div>
+      <div>
+        <span>{kilometers}</span>
+      </div>
+      <div>
         <IconButton onClick={editStep}>
           <span className="material-icons">edit</span>
         </IconButton>
         <IconButton onClick={deleteStep}>
           <span className="material-icons">clear</span>
         </IconButton>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
+};
+
+StepsItem.propTypes = {
+  step: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+    kilometers: PropTypes.number.isRequired,
+  }).isRequired,
+  onDeleteStep: PropTypes.func.isRequired,
+  onEditStep: PropTypes.func.isRequired,
 };
 
 export default StepsItem;
