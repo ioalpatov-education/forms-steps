@@ -73,3 +73,8 @@
   text-align: center;
 }
 
+.steps-item__btn {
+  font-size: 16px !important;
+  color: #000000 !important;
+}
+

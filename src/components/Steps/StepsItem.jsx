@@ -1,4 +1,3 @@
-import "material-icons/iconfont/material-icons.css";
 import IconButton from "@mui/material/IconButton";
 import { convertDateToString } from "./utils";
 import PropTypes from "prop-types";
@@ -23,11 +22,11 @@ const StepsItem = ({ step, onDeleteStep, onEditStep }) => {
         <span>{kilometers}</span>
       </div>
       <div>
-        <IconButton onClick={editStep}>
-          <span className="material-icons">edit</span>
+        <IconButton className="steps-item__btn" onClick={editStep}>
+          ✎
         </IconButton>
-        <IconButton onClick={deleteStep}>
-          <span className="material-icons">clear</span>
+        <IconButton className="steps-item__btn" onClick={deleteStep}>
+          ✘
         </IconButton>
       </div>
     </div>

@@ -11,7 +11,12 @@ const stepsFormSchema = Yup.object({
     .required("Обязательное поле"),
 });
 
-const StepsForm = ({ onAddStep }) => {
+const StepsForm = ({ editingStep, onAddStep }) => {
+  const initialValues = {
+    date: !editingStep ? "" : editingStep.date.toISOString().split("T")[0],
+    kilometers: !editingStep ? "" : editingStep.kilometers,
+  };
+
   const maxDate = new Date().toISOString().split("T")[0];
 
   const addStep = (values, actions) => {
@@ -30,7 +35,8 @@ const StepsForm = ({ onAddStep }) => {
 
   return (
     <Formik
-      initialValues={{ date: "", kilometers: "" }}
+      initialValues={initialValues}
+      enableReinitialize
       validationSchema={stepsFormSchema}
       onSubmit={addStep}
     >
@@ -58,6 +64,11 @@ const StepsForm = ({ onAddStep }) => {
 };
 
 StepsForm.propTypes = {
+  editingStep: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+    kilometers: PropTypes.number.isRequired,
+  }),
   onAddStep: PropTypes.func.isRequired,
 };
 

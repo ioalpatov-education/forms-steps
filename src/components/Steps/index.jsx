@@ -4,11 +4,14 @@ import { useState } from "react";
 
 const Steps = () => {
   const [steps, setSteps] = useState([]);
+  const [editingStep, setEditingStep] = useState(null);
 
   const addStep = (newStep) => {
     let foundDate = steps.find((step) => {
       return step.date.toString() === newStep.date.toString();
     });
+
+    if (!!editingStep) setEditingStep(null);
 
     if (!foundDate) {
       setSteps([...steps, newStep]);
@@ -22,7 +25,6 @@ const Steps = () => {
           kilometers: step.kilometers + newStep.kilometers,
         };
       }
-
       return step;
     });
 
@@ -34,16 +36,21 @@ const Steps = () => {
     setSteps([...newSteps]);
   };
 
-  const editStep = (stepId) => {};
+  const editStep = (stepId) => {
+    const foundStep = steps.find((step) => step.id === stepId);
+    setEditingStep({ ...foundStep });
+
+    deleteStep(stepId);
+  };
+
+  const list = !!steps.length ? (
+    <StepsList steps={steps} onDeleteStep={deleteStep} onEditStep={editStep} />
+  ) : null;
 
   return (
     <div className="steps-wrapper">
-      <StepsForm onAddStep={addStep} />
-      <StepsList
-        steps={steps}
-        onDeleteStep={deleteStep}
-        onEditStep={editStep}
-      />
+      <StepsForm editingStep={editingStep} onAddStep={addStep} />
+      {list}
     </div>
   );
 };
